@@ -1,0 +1,78 @@
+class Main{
+    static class Node{
+        int data;
+        Node next;
+        public Node(int data){
+            this.data=data;
+            this.next=null;
+        }
+    }
+    public Node head = null;
+
+    public void insert_at_end(int data){
+        Node newNode=new Node(data);
+        if(head==null){
+            head=newNode;
+        }
+        else {
+            Node current = head;
+            while (current.next != null) {
+                current = current.next;
+            }
+            current.next = newNode;
+        }
+    }
+    public static Node merge(Node a,Node b){
+        Node head;
+        if(a.data<=b.data){
+            head=a;
+            a=a.next;
+        }
+        else {
+            head=b;
+            b=b.next;
+        }
+        Node tail=head;
+        while (a!=null&&b!=null){
+            if(a.data<=b.data){
+                tail.next=a;
+                a=a.next;
+            }
+            else {
+                tail.next=b;
+                b=b.next;
+            }
+            tail=tail.next;
+        }
+        if(a==null){
+            tail.next=b;
+        }
+        else {
+            tail.next=a;
+        }
+        return head;
+    }
+    public void display(){
+        Node current =head;
+        while (current!=null){
+            System.out.print(current.data+" ");
+            current=current.next;
+        }
+    }
+    public static void main(String[] args){
+        Main sl1=new Main();
+        sl1.insert_at_end(1);
+        sl1.insert_at_end(4);
+        sl1.insert_at_end(8);
+        Main sl2=new Main();
+        sl2.insert_at_end(3);
+        sl2.insert_at_end(5);
+        sl2.insert_at_end(8);
+        sl2.insert_at_end(9);
+        sl2.insert_at_end(14);
+        sl2.insert_at_end(18);
+        Main result=new Main();
+        result.head=merge(sl1.head,sl2.head);
+        result.display();
+    }
+}

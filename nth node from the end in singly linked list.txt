@@ -1,0 +1,16 @@
+ public void nth_node_from_the_end(int key){
+        Node mainPtr=head;
+        Node refPtr=head;
+        int count=0;
+        while (count<key){
+            refPtr=refPtr.next;
+            count++;
+        }
+        while (refPtr!=null){
+            refPtr=refPtr.next;
+            mainPtr=mainPtr.next;
+        }
+        if (mainPtr!=null) {
+            System.out.println("node "+key+" from the end is "+mainPtr.data);
+        }
+    }

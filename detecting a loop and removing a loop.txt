@@ -1,0 +1,50 @@
+class Main{
+    static class Node{
+        int data;
+        Node next;
+        public Node(int data){
+            this.data=data;
+            this.next=null;
+        }
+    }
+    Node head;
+    public void create_loop() {
+        Node first = new Node(1);
+        Node second = new Node(2);
+        Node third = new Node(3);
+        Node fourth = new Node(4);
+        Node fifth = new Node(5);
+        Node sixth = new Node(6);
+        head = first;
+        first.next=second;
+        second.next=third;
+        third.next=fourth;
+        fourth.next=fifth;
+        fifth.next=sixth;
+        sixth.next=third;
+    }
+    public void detect_a_loop(){
+        Node fastPtr=head;
+        Node slowPtr=head;
+        while (fastPtr!=null&&fastPtr.next!=null) {
+            fastPtr = fastPtr.next.next;
+            slowPtr = slowPtr.next;
+            if (fastPtr == slowPtr) {
+                removeLoop(slowPtr);
+            }
+        }
+    }
+    public void removeLoop(Node slowPtr) {
+        Node temp=head;
+        while (temp.next!=slowPtr.next){
+            temp=temp.next;
+            slowPtr=slowPtr.next;
+        }
+        slowPtr.next=null;
+    }
+    public static void main(String[] args){
+        Main sl=new Main();
+        sl.create_loop();
+        sl.detect_a_loop();
+    }
+}

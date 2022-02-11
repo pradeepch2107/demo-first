@@ -1,0 +1,13 @@
+public void insertNode_in_sorted_linkedList(int data){
+        Node newNode=new Node(data);
+        Node temp=head;
+        Node current=null;
+        while (temp!=null&&temp.data<data){
+            current=temp;
+            temp=temp.next;
+        }
+        newNode.next=temp;
+        if (current!=null) {
+            current.next = newNode;
+        }
+    }
